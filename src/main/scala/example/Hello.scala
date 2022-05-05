@@ -13,9 +13,9 @@ object Hello extends App {
 
 //  print(Source.fromResource("rootfile.json").toList)
 
-  private val path = "/subdir"
+  private val path = "/subdir/subsubdir"
   val resourceFile = this.getClass.getResource(path)
-  print(resourceFile)
+  println(resourceFile)
   val uri = resourceFile.toURI()
   val dirPath: Path =
     try {
@@ -28,8 +28,10 @@ object Hello extends App {
     }
 
   Files.list(dirPath).forEach { it =>
-    println(it.getFileName)
-    if (it.getFileName.toString().endsWith("txt")) {
+    println(s"ToString: ${it.toString}")
+    println(s"Filename: ${it.getFileName.toString}")
+    println(s"AbsolutePath: ${it.toAbsolutePath.toString}")
+    if (it.getFileName.toString.endsWith("json")) {
       println("Result:")
       println(Files.readString(it))
     }
